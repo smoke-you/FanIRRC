@@ -24,14 +24,6 @@
  * compiler error will be raised.
  * */
 
-#define	NUM_BUTTONS				(4)
-/* The number of user-defined buttons. */
-#define	BTN_DEBOUNCE_MS		(50)
-/* The debounce delay for the user-defined buttons. */
-#define	BTN_REPEAT_MS			(1000)
-/* The number of milliseconds between repeated button triggers if a button is
- * held down for an extended period. */
-
 /*===============================================
  public data types
  ===============================================*/
@@ -56,6 +48,10 @@ typedef union {
 	};
 } Triggers_t;
 
+typedef struct {
+	const int32_t debounce;
+	const int32_t repeat;
+} ButtonSetup_t;
 
 /*===============================================
  calculated public constants
@@ -113,14 +109,5 @@ typedef union {
 #if (SYSTICK_OVERFLOW > 65536)
 	#error "System tick timer will overflow; reduce SYS_CLK or SYSTICK_MS"
 #endif
-
-#define	BTN_DEBOUNCE_DELAY		((int16_t)((BTN_DEBOUNCE_MS + (SYSTICK_MS / 2)) / SYSTICK_MS))
-#define	BTN_REPEAT_DELAY			((int16_t)((BTN_REPEAT_MS + (SYSTICK_MS / 2)) / SYSTICK_MS))
-
-#if (BTN_DEBOUNCE_MS < SYSTICK_MS)
-	#undef BTN_DEBOUNCE_DELAY
-	#define BTN_DEBOUNCE_DELAY	(1)
-#endif
-
 
 #endif // SRC_INC_CONFIG_H_

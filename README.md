@@ -1,4 +1,4 @@
-# Custom IR Remote Control Hardware and Firmware
+# Replacement IR Remote Control Hardware and Firmware
 
 ## Background
 
@@ -6,6 +6,8 @@ I felt the need to design and build a custom IR remote control because:
 
 * My young dog decided that he’d chew my AM02 fan remote control, almost to the point that it no longer worked, and
 * It’s been a while since I did any embedded systems development for work, and I’m bored with my work at the moment: authoring webservers and microservices with Python.  It’s not very challenging, a bit like assembling software Lego.
+
+![damaged original](/Images/damaged_original.png)
 
 ## License
 
@@ -130,7 +132,9 @@ Two DMA channels are also activated, one (DMA1_Channel2) triggered by TIM2’s U
 
 ## Hardware Development
 
-All of the files necessary to replicate my custom board design can be found [here](/Hardware).
+All of the files necessary to replicate my custom board design can be found [here](/Hardware).  Note that this is a later iteration of the board, to add in an extra test point for the modulated IR signal that drives the IRED, marked on the PCB silkscreen as A3.  The layout shown below is slightly different, but the pin usage on the microcontroller is identical.
+
+![assembled device](/Images/assembled.png)
 
 ### Prototyping
 
@@ -149,7 +153,7 @@ A Nucleo-L011K4 was used as a software development platform.  The Nucleo board w
 
 ### Custom Board
 
-I designed and constructed a PCB based on the same microcontroller as the protoyping design: an STM32L011K4, in an LQPF32 package.  The PCB was designed to mount into a small ABS enclosure that I obtained from a local hobby electronics store.  Power is provided by a CR2032 coin cell, and a 6-pin header exposes the microcontroller’s SWD port for load and debug.  Apart from mostly using SMT components, the build uses almost identical parts to the prototype design.
+I designed and constructed a PCB based on the same microcontroller as the protoyping design: an STM32L011K4, in an LQPF32 package.  The PCB was designed to mount into a [small ABS enclosure that I obtained from a local hobby electronics store](https://www.jaycar.com.au/plastic-molded-enclosures-dark-grey-abs-90-x-50-x-16mm/p/HB6030).  Power is provided by a CR2032 coin cell, and a 6-pin header exposes the microcontroller’s SWD port for load and debug.  Apart from mostly using SMT components, the build uses almost identical parts to the prototype design.
 
 Pin assignments are:
 
@@ -163,3 +167,9 @@ Pin assignments are:
 | Modulation Out | 9 | PA3 |
 | Transmit Active | 7 | PA1 |
 | RUN Mode | 6 | PA0 |
+
+## Comparison
+
+My replacement IR remote works perfectly.  It's a little larger than the one from the manufacturer, but I can live with that.
+
+![compare](/Images/compare.png)
